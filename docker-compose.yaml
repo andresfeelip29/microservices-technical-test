@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+  mysql8:
+    container_name: mysql8
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: sasa
+      MYSQL_DATABASE: db_cliente
+    volumes:
+      - data-mysql:/var/lib/mysql
+    restart: always
+    networks:
+      - neoris
+  postgres14:
+    container_name: postgres14
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: sasa
+      POSTGRES_DB: db_cuenta
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - neoris
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGODB_INITDB_ROOT_USERNAME: mongouser
+      MONGODB_INITDB_ROOT_PASSWORD: mongopass
+      MONGO_INITDB_DATABASE: db_movimiento
+    volumes:
+      - data-mongo:/data/db
+    restart: always
+    networks:
+      - neoris
+
+volumes:
+  data-mysql:
+    name: data-mysql
+  data-postgres:
+    name: data-postgres
+  data-mongo:
+    name: data-mongo
+
+networks:
+  neoris:
+    name: neoris

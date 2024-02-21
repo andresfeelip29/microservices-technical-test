@@ -1,0 +1,23 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "http://127.0.0.1:9000"
+      client:
+        registration:
+          microservices-users:
+            provider: spring
+            client-id: client-users
+            client-secret: 12345
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8001/api/v1/usuarios/authorized"
+            scope:
+              - openid
+              - profile
+              - read
+              - write
+            client-name: microservices-users
+        provider:
+          spring:
+            issuer-uri: "http://127.0.0.1:9000"
