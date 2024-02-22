@@ -1,6 +1,7 @@
 package com.co.neoristest.users.service;
 
 import com.co.neoristest.users.domain.dto.UserDto;
+import com.co.neoristest.users.domain.dto.UserLoginResponseDto;
 import com.co.neoristest.users.domain.dto.UserResponseDto;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface UserService {
 
     Optional<UserResponseDto> findUserAccountDetail(Long id);
 
-    Optional<UserResponseDto> findUserByUsername(String username);
+    Optional<UserLoginResponseDto> findUserByUsername(String username);
 
     UserResponseDto save(UserDto userDto);
 

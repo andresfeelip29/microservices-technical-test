@@ -3,6 +3,7 @@ package com.co.neoristest.users.service.impl;
 import com.co.neoristest.common.domain.enums.ExceptionMessage;
 import com.co.neoristest.users.client.AccountFeignRequest;
 import com.co.neoristest.users.domain.dto.UserDto;
+import com.co.neoristest.users.domain.dto.UserLoginResponseDto;
 import com.co.neoristest.users.domain.dto.UserResponseDto;
 import com.co.neoristest.users.domain.models.User;
 import com.co.neoristest.users.domain.models.UserAccount;
@@ -77,10 +78,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<UserResponseDto> findUserByUsername(String username) {
+    public Optional<UserLoginResponseDto> findUserByUsername(String username) {
         log.info("Se realiza consulta de usuario por username: {}", username);
         return Optional.ofNullable(this.userRepository.findByUsername(username)
-                .map(this.userMapper::userToUserResponseDto)
+                .map(this.userMapper::userToUserLoginResponseDto)
                 .orElseThrow(() -> new UserNotFoundException(String.format(ExceptionMessage.USERNAME_NOT_FOUND.getMessage(), username))));
     }
 

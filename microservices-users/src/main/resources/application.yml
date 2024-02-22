@@ -11,7 +11,7 @@ spring:
             client-id: client-users
             client-secret: 12345
             authorization-grant-type: authorization_code
-            redirect-uri: "http://127.0.0.1:8001/api/v1/usuarios/authorized"
+            redirect-uri: "http://127.0.0.1:8001/api/v1/usuarios/auth/authorized"
             scope:
               - openid
               - profile

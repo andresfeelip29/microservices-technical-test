@@ -2,6 +2,7 @@ package com.co.neoristest.users.mapper;
 
 import com.co.neoristest.users.domain.AccountDetail;
 import com.co.neoristest.users.domain.dto.UserDto;
+import com.co.neoristest.users.domain.dto.UserLoginResponseDto;
 import com.co.neoristest.users.domain.dto.UserResponseDto;
 import com.co.neoristest.users.domain.models.User;
 import com.co.neoristest.users.domain.models.UserAccount;
@@ -25,6 +26,8 @@ public interface UserMapper {
     @Mapping(source = "userAccounts" , target = "accounts", qualifiedByName = "accountListToListIds")
     @Mapping(source = "accountDetails" , target = "accountDetails", qualifiedByName = "accountList")
     UserResponseDto userToUserResponseDto(User user);
+
+    UserLoginResponseDto userToUserLoginResponseDto(User user);
 
     @Mapping(source = "password", target = "password", qualifiedBy = EncodedMapping.class)
     User updateUserToUserDto(@MappingTarget User user, UserDto userDto);

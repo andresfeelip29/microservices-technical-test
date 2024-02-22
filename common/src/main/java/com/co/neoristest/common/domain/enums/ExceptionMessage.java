@@ -4,7 +4,9 @@ public enum ExceptionMessage {
 
     USER_NOT_FOUND("No existe usuario registrado en sistema con id: %d!"),
 
-    USERNAME_NOT_FOUND("No existe usuario registrado en sistema con nombre de usuario: %s!");
+    USERNAME_NOT_FOUND("No existe usuario registrado en sistema con nombre de usuario: %s!"),
+
+    INCORRECT_CREDENTIALS("Credenciales incororrestas!");
 
     private final String message;
 

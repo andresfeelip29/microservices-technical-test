@@ -10,9 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @Slf4j
@@ -48,14 +46,6 @@ public class UserController {
                 .orElse(ResponseEntity.badRequest().build());
     }
 
-    @GetMapping("/external/{username}")
-    public ResponseEntity<UserResponseDto> findUserByUsername(@PathVariable String username) {
-        log.info("Se recibe peticion de consulta de usuario con id: {}", username);
-        return this.userService.findUserByUsername(username)
-                .map(user -> ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(user))
-                .orElse(ResponseEntity.badRequest().build());
-    }
-
     @PostMapping("/")
     public ResponseEntity<UserResponseDto> saveUser(@Valid @RequestBody UserDto userDto) {
         log.info("Se recibe peticion para almacenar usuario {}!", userDto);
@@ -86,12 +76,5 @@ public class UserController {
         log.info("Cliente eliminado con exito!");
         return ResponseEntity.status(HttpStatus.NO_CONTENT).contentType(MediaType.APPLICATION_JSON).build();
     }
-
-    @GetMapping("/authorized")
-    public Map<String,String> authorized(@RequestParam(name = "code") String code) {
-        log.info("Se recibe peticion de consulta de autorizacion");
-        return Collections.singletonMap("code", code);
-    }
-
 
 }
