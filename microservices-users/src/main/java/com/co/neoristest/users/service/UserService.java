@@ -1,6 +1,7 @@
 package com.co.neoristest.users.service;
 
 import com.co.neoristest.users.domain.dto.UserDto;
+import com.co.neoristest.users.domain.dto.UserExternalDto;
 import com.co.neoristest.users.domain.dto.UserLoginResponseDto;
 import com.co.neoristest.users.domain.dto.UserResponseDto;
 
@@ -13,6 +14,8 @@ public interface UserService {
 
     Optional<UserResponseDto> findUserById(Long id);
 
+    Optional<UserExternalDto> findUserByIdFromMicroservicesAccount(Long id);
+
     Optional<UserResponseDto> findUserAccountDetail(Long id);
 
     Optional<UserLoginResponseDto> findUserByUsername(String username);
@@ -22,5 +25,9 @@ public interface UserService {
     UserResponseDto update(UserDto userDto, Long id);
 
     void delete (Long id);
+
+    void associateAccountWithUser(Long userId , Long accountId);
+
+    void deleteAccountUserFromMicroserviceAccount(Long userId, Long accountId);
 
 }

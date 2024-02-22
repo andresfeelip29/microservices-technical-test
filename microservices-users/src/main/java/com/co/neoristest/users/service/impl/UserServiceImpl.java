@@ -3,6 +3,7 @@ package com.co.neoristest.users.service.impl;
 import com.co.neoristest.common.domain.enums.ExceptionMessage;
 import com.co.neoristest.users.client.AccountFeignRequest;
 import com.co.neoristest.users.domain.dto.UserDto;
+import com.co.neoristest.users.domain.dto.UserExternalDto;
 import com.co.neoristest.users.domain.dto.UserLoginResponseDto;
 import com.co.neoristest.users.domain.dto.UserResponseDto;
 import com.co.neoristest.users.domain.models.User;
@@ -55,6 +56,14 @@ public class UserServiceImpl implements UserService {
         log.info("Se realiza consulta de usuario por id: {}", id);
         return Optional.ofNullable(this.userRepository.findById(id)
                 .map(this.userMapper::userToUserResponseDto)
+                .orElseThrow(() -> new UserNotFoundException(String.format(ExceptionMessage.USER_NOT_FOUND.getMessage(), id))));
+    }
+
+    @Override
+    public Optional<UserExternalDto> findUserByIdFromMicroservicesAccount(Long id) {
+        log.info("Se realiza consulta de usuario por id: {}", id);
+        return Optional.ofNullable(this.userRepository.findById(id)
+                .map(this.userMapper::userToUserExternalDto)
                 .orElseThrow(() -> new UserNotFoundException(String.format(ExceptionMessage.USER_NOT_FOUND.getMessage(), id))));
     }
 
@@ -116,4 +125,34 @@ public class UserServiceImpl implements UserService {
         log.info("Se elimina usuario con id: {}", id);
     }
 
+    @Override
+    @Transactional
+    public void associateAccountWithUser(Long userId, Long accountId) {
+        log.info("Se realiza consulta desde microservicio de cuentas, para asociar cuenta a usuario con id : {}", userId);
+        UserAccount userAccount = null;
+        User user = this.userRepository.findById(userId).
+                orElseThrow(() -> new UserNotFoundException(String.format(ExceptionMessage.USER_NOT_FOUND.getMessage(),
+                        userId)));
+        userAccount = new UserAccount();
+        userAccount.setAccountId(accountId);
+        user.addAccountToUser(userAccount);
+        this.userRepository.save(user);
+        log.info("Se realiza asignacion de cuenta con id: {} a usuario con id : {}", accountId, userId);
+    }
+
+    @Override
+    @Transactional
+    public void deleteAccountUserFromMicroserviceAccount(Long userId, Long accountId) {
+        log.info("Se inicia proceso de eliminar de cuenta con id: {}, desde microservicio de cuentas", accountId);
+        User user = this.userRepository.findById(userId).
+                orElseThrow(() -> new UserNotFoundException(String.format(ExceptionMessage.USER_NOT_FOUND.getMessage(),
+                        userId)));
+        user.getUserAccounts().forEach(userAccount -> {
+            if (userAccount.getAccountId().equals(accountId)) {
+                user.removeAccountToUser(userAccount);
+            }
+        });
+        this.userRepository.save(user);
+        log.info("Se elimina cuenta con id: {}, asociada al usuario con id: {}", accountId, userId);
+    }
 }

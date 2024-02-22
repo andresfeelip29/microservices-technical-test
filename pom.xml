@@ -9,6 +9,8 @@
         <module>common</module>
         <module>microservices-auth</module>
         <module>microservices-gateway</module>
+        <module>microservices-accounts</module>
+        <module>microservices-transactions</module>
     </modules>
 
 

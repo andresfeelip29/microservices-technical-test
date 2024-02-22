@@ -26,7 +26,7 @@ This repository is created for test in neoris
 2. [Users microservices](/microservices-users) It is responsible for the management of users, for subsequent consultation and verification of identity by the microservice auth, as well as the assignment of bank accounts.
 3. [Account microservices](/microservices-accounts) It handles the management of accounts and amounts, serves as an intermediary for assigning accounts to users as well as being consulted by the transaction microservice.
 4. [Transactional microservices](/microservices-transactional) Transfers of amounts between accounts are handled, as well as the generation of records on transactions made to the accounts.
-5. [Gateway](/gateway) Functions as a gateway for the connection and routing of other microservices.
+5. [Gateway](/microservices-gateway) Functions as a gateway for the connection and routing of other microservices.
 
 ## Architecture Diagram
 

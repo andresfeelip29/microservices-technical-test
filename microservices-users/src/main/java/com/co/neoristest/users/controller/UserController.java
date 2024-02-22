@@ -1,6 +1,7 @@
 package com.co.neoristest.users.controller;
 
 import com.co.neoristest.users.domain.dto.UserDto;
+import com.co.neoristest.users.domain.dto.UserExternalDto;
 import com.co.neoristest.users.domain.dto.UserResponseDto;
 import com.co.neoristest.users.service.UserService;
 import jakarta.validation.Valid;
@@ -37,6 +38,7 @@ public class UserController {
                 .map(user -> ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(user))
                 .orElse(ResponseEntity.badRequest().build());
     }
+
 
     @GetMapping("/detail/{userId}")
     public ResponseEntity<UserResponseDto> findUserWithAccountDetail(@PathVariable Long userId) {
@@ -75,6 +77,29 @@ public class UserController {
         this.userService.delete(userId);
         log.info("Cliente eliminado con exito!");
         return ResponseEntity.status(HttpStatus.NO_CONTENT).contentType(MediaType.APPLICATION_JSON).build();
+    }
+
+    @GetMapping("/external/{userId}")
+    public ResponseEntity<UserExternalDto> findUserByIdFromMicroservicesAccount(@PathVariable Long userId) {
+        log.info("Se recibe peticion de consulta de microservicio cuentas, para usuario con id: {}", userId);
+        return this.userService.findUserByIdFromMicroservicesAccount(userId)
+                .map(user -> ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(user))
+                .orElse(ResponseEntity.badRequest().build());
+    }
+
+    @PostMapping("/external/")
+    public ResponseEntity<Void> saveClientAccountFromMicroserviceClient(@RequestParam Long accountId, @RequestParam Long userId) {
+        log.info("Se recibe peticion desde microservicio cuentas, para asociar cuenta: {} , a cliente con id: {}",
+                accountId, userId);
+        this.userService.associateAccountWithUser(userId, accountId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/external/")
+    public ResponseEntity<Void> deleteAccountUserFromMicroserviceAccount(@RequestParam Long userId,  @RequestParam Long accountId) {
+        log.info("Se recibe peticion desde microservicio cuentas, para la eliminacion de cuenta con id: {}", accountId);
+        this.userService.deleteAccountUserFromMicroserviceAccount (userId, accountId);
+        return ResponseEntity.noContent().build();
     }
 
 }

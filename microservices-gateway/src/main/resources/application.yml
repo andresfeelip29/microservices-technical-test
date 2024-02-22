@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: microservices-users
+          uri: http://127.0.0.1:8001
+          predicates:
+            - Path=/api/v1/usuarios/**
+          filters:
+            - StripPrefix=3
+        - id: microservices-auth
+          uri: http://127.0.0.1:9000
+          predicates:
+            - Path=/**
+          filters:
+              - StripPrefix=0
+
+

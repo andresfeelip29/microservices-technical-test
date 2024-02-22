@@ -11,7 +11,7 @@ import java.util.List;
 @FeignClient(name = "microservices-account", url = "${microservices.account.url}/cuentas")
 public interface AccountFeignRequest {
 
-    @GetMapping("/userRequest/")
+    @GetMapping("/external/")
     List<AccountDetail> getAllAccoutDetail(@RequestParam Iterable<Long> accountsIds);
 
 }
