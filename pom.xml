@@ -8,6 +8,7 @@
         <module>microservices-users</module>
         <module>common</module>
         <module>microservices-auth</module>
+        <module>microservices-gateway</module>
     </modules>
 
 
