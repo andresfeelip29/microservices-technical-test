@@ -7,4 +7,4 @@ import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 public record AccountDto(@NotNull BankAccountType accountType, @NotNull @Positive BigDecimal balance,
-                         @NotNull Boolean status, @Positive Long clientId) { }
+                         @NotNull Boolean status, @Positive Long userId) { }

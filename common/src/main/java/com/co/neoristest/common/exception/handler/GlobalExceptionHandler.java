@@ -25,14 +25,6 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
 
-    @ExceptionHandler(value = {DomainException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorResponse> handleException(DomainException exception) {
-        log.error(exception.getMessage(), exception);
-        return this.buildErrorResponse(exception, exception.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-
-
     @ExceptionHandler(value = {Exception.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<ErrorResponse> handleException(Exception exception) {

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "microservices-account", url = "${microservices.account.url}/cuentas")
+@FeignClient(name = "microservices-accounts", url = "${microservices.accounts.url}/cuentas")
 public interface AccountFeignRequest {
 
     @GetMapping("/external/")

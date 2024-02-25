@@ -8,8 +8,10 @@ import com.co.neoristest.users.domain.dto.UserLoginResponseDto;
 import com.co.neoristest.users.domain.dto.UserResponseDto;
 import com.co.neoristest.users.domain.models.User;
 import com.co.neoristest.users.domain.models.UserAccount;
+import com.co.neoristest.users.exception.AccountUserNotFoundException;
 import com.co.neoristest.users.exception.UserNotFoundException;
 import com.co.neoristest.users.mapper.UserMapper;
+import com.co.neoristest.users.repository.UserAccountRepository;
 import com.co.neoristest.users.repository.UserRepository;
 import com.co.neoristest.users.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,16 +30,20 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final UserAccountRepository userAccountRepository;
+
     private final UserMapper userMapper;
 
     private final AccountFeignRequest accountFeignRequest;
 
 
     public UserServiceImpl(UserRepository userRepository, UserMapper userMapper,
-                           AccountFeignRequest accountFeignRequest) {
+                           AccountFeignRequest accountFeignRequest,
+                           UserAccountRepository userAccountRepository) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.accountFeignRequest = accountFeignRequest;
+        this.userAccountRepository = userAccountRepository;
     }
 
     @Override
@@ -143,16 +149,17 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void deleteAccountUserFromMicroserviceAccount(Long userId, Long accountId) {
+        List<UserAccount> accountForRemove;
         log.info("Se inicia proceso de eliminar de cuenta con id: {}, desde microservicio de cuentas", accountId);
         User user = this.userRepository.findById(userId).
                 orElseThrow(() -> new UserNotFoundException(String.format(ExceptionMessage.USER_NOT_FOUND.getMessage(),
                         userId)));
-        user.getUserAccounts().forEach(userAccount -> {
-            if (userAccount.getAccountId().equals(accountId)) {
-                user.removeAccountToUser(userAccount);
-            }
-        });
-        this.userRepository.save(user);
+        if (!user.getUserAccounts().isEmpty()) {
+            accountForRemove = user.getUserAccounts().stream().filter(userAccount ->userAccount.getAccountId().equals(accountId) ).toList();
+            accountForRemove.forEach(user::removeAccountToUser);
+            this.userRepository.save(user);
+        }
         log.info("Se elimina cuenta con id: {}, asociada al usuario con id: {}", accountId, userId);
     }
+
 }

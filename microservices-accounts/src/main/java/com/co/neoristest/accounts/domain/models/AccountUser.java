@@ -14,7 +14,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Table(name = "cuentas_usuarios")
 @Entity
-public class AccountClient extends BaseEntity {
+public class AccountUser extends BaseEntity {
 
     @Column(name = "cliente_id")
     private Long clientId;
@@ -24,7 +24,7 @@ public class AccountClient extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        AccountClient that = (AccountClient) o;
+        AccountUser that = (AccountUser) o;
         return Objects.equals(getClientId(), that.getClientId());
     }
 

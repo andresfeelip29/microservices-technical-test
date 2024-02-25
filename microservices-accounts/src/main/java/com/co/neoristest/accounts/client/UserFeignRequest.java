@@ -4,7 +4,7 @@ import com.co.neoristest.accounts.domain.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "microservice-client", url = "${microservices.client.url}/clientes")
+@FeignClient(name = "microservice-users", url = "${microservices.users.url}/usuarios")
 public interface UserFeignRequest {
 
     @GetMapping("/external/{userId}")
@@ -12,7 +12,6 @@ public interface UserFeignRequest {
 
     @PostMapping("/external/")
     void saveUserAccountFromMicroserviceUser(@RequestParam Long accountId, @RequestParam Long userId);
-
 
     @DeleteMapping("/external/")
     void deleteAccountUserFromMicroserviceUser(@RequestParam Long userId , @RequestParam Long accountId);

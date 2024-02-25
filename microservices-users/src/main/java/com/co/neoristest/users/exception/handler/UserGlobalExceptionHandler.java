@@ -18,7 +18,6 @@ public class UserGlobalExceptionHandler extends GlobalExceptionHandler {
     @ExceptionHandler(value = {UserNotFoundException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorResponse> handleException(Throwable e) {
-        log.error(e.getMessage(), e);
         return this.buildErrorResponse(e, e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

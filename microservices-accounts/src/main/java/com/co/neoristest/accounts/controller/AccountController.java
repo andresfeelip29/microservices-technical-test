@@ -32,12 +32,6 @@ public class AccountController {
         return ResponseEntity.ok(this.accountService.getAllAccounts());
     }
 
-    @GetMapping("/external/")
-    public ResponseEntity<List<AccountExternalDto>> getAllAccountsFromMicroserviceClient(@RequestParam List<Long> accountsIds) {
-        log.info("Se recibe peticion para consulta de todos los clientes");
-        return ResponseEntity.ok(this.accountService.getAllAccountsFromMicroserviceUsers(accountsIds));
-    }
-
     @GetMapping("/detail/{accountId}")
     public ResponseEntity<AccountResponseDto> findAccountUserDetail(@PathVariable Long accountId) {
         log.info("Se recibe peticion de consulta de cuenta con detalle con id: {}", accountId);
@@ -71,7 +65,7 @@ public class AccountController {
         log.info("Se recibe peticion para actualizar cuenta {}!", accountDTO);
         AccountResponseDto result = this.accountService.updateAccount(accountDTO, accountId);
         if (!Objects.isNull(result)) {
-            log.info("Se actualiza cuenta con id: {}, y usuario id: {}", result.id(), result.user().getId());
+            log.info("Se actualiza cuenta con id: {}, y usuario id: {}", result.id(), accountDTO.userId());
             return ResponseEntity.status(HttpStatus.CREATED).contentType(MediaType.APPLICATION_JSON).body(result);
         }
         log.error("Error en solicitud de actualizacion de cuenta!");
@@ -88,6 +82,12 @@ public class AccountController {
         }
         log.error("Error en solicitud de eliminacion de cuenta!");
         return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/external/")
+    public ResponseEntity<List<AccountExternalDto>> getAllAccountsFromMicroserviceClient(@RequestParam List<Long> accountsIds) {
+        log.info("Se recibe peticion para consulta de todos los clientes");
+        return ResponseEntity.ok(this.accountService.getAllAccountsFromMicroserviceUsers(accountsIds));
     }
 
     @PutMapping("/external/")

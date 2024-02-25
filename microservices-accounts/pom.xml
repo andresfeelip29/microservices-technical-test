@@ -36,7 +36,6 @@
 		</dependency>
 	</dependencies>
 
-
 	<profiles>
 		<!-- Developer Profile -->
 		<profile>
@@ -102,6 +101,5 @@
 		</resources>
 	</build>
 	-->
-
 
 </project>

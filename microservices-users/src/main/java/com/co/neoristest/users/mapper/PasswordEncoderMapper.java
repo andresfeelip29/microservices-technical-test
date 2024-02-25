@@ -12,10 +12,11 @@ import org.springframework.stereotype.Component;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PasswordEncoderMapper {
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    //private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @EncodedMapping
     public String encode(String value) {
-        return bCryptPasswordEncoder.encode(value);
+        return value;
+        //return bCryptPasswordEncoder.encode(value);
     }
 }

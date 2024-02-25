@@ -95,10 +95,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+
     @DeleteMapping("/external/")
-    public ResponseEntity<Void> deleteAccountUserFromMicroserviceAccount(@RequestParam Long userId,  @RequestParam Long accountId) {
+    public ResponseEntity<Void> deleteAccountUserFromMicroserviceAccount(@RequestParam Long userId, @RequestParam Long accountId) {
         log.info("Se recibe peticion desde microservicio cuentas, para la eliminacion de cuenta con id: {}", accountId);
-        this.userService.deleteAccountUserFromMicroserviceAccount (userId, accountId);
+        this.userService.deleteAccountUserFromMicroserviceAccount(userId, accountId);
         return ResponseEntity.noContent().build();
     }
 

@@ -38,9 +38,9 @@ public class Account extends BaseEntity {
     private Boolean status;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, targetEntity = AccountUser.class)
     @JoinColumn(name = "cliente_id")
-    private AccountClient accountClient;
+    private AccountUser accountUser;
 
     @Transient
     private User user;
@@ -53,13 +53,13 @@ public class Account extends BaseEntity {
         Account account = (Account) o;
         return getAccountNumber().equals(account.getAccountNumber()) && getAccountType() == account.getAccountType()
                 && getBalance().equals(account.getBalance()) && getStatus().equals(account.getStatus()) &&
-                getAccountClient().equals(account.getAccountClient()) && getUser().equals(account.getUser());
+                getAccountUser().equals(account.getAccountUser()) && getUser().equals(account.getUser());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getAccountNumber(),
                 getAccountType(), getBalance(), getStatus(),
-                getAccountClient(), getUser());
+                getAccountUser(), getUser());
     }
 }

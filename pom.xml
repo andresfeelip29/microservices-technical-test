@@ -52,6 +52,26 @@
                 <artifactId>common</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.co.neoris-test</groupId>
+                <artifactId>microservices-accounts</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.co.neoris-test</groupId>
+                <artifactId>microservices-auth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.co.neoris-test</groupId>
+                <artifactId>microservices-gateway</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.co.neoris-test</groupId>
+                <artifactId>microservices-transactions</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
 
             <dependency>
