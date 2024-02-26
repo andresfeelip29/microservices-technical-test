@@ -186,12 +186,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public Optional<AccountResponseDto> updateBalanceAccount(Long accountId, BigDecimal newBalance) {
+    public Optional<AccountResponseDto> updateBalanceAccount(String accountNumber, BigDecimal newBalance) {
         Optional<AccountResponseDto> response;
-        log.info("Se incia proceso de actualizacion de balance de la cuenta con id: {} " +
-                "desde microservicio de movimientos", accountId);
-        Account account = this.accountRepository.findById(accountId)
-                .orElseThrow(() -> new AccountNotFoundException(String.format(ExceptionMessage.ACCOUNT_NOT_FOUND.getMessage(), accountId)));
+        log.info("Se inicia proceso de actualizacion de balance de la cuenta con id: {} " +
+                "desde microservicio de movimientos", accountNumber);
+        Account account = this.accountRepository.findAccountByAccountNumber(accountNumber)
+                .orElseThrow(() -> new AccountNotFoundException(String.format(ExceptionMessage.ACCOUNT_NUMBER_NOT_FOUND.getMessage(), accountNumber)));
         account.setBalance(newBalance);
         response = Optional.ofNullable(this.accountMapper.accountToAccountResponseDto(this.accountRepository.save(account)));
         if (response.isPresent()) {

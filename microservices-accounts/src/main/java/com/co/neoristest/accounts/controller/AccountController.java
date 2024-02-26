@@ -91,9 +91,9 @@ public class AccountController {
     }
 
     @PutMapping("/external/")
-    public ResponseEntity<AccountResponseDto> updateBalanceAccount(@RequestParam Long accountId, @RequestParam BigDecimal newBalance) {
-        log.info("Se recibe peticion externa desde microservicio de transaccion para actualizar balance de la cuenta con id: {}", accountId);
-        return this.accountService.updateBalanceAccount(accountId, newBalance)
+    public ResponseEntity<AccountResponseDto> updateBalanceAccount(@RequestParam String accountNumber, @RequestParam BigDecimal newBalance) {
+        log.info("Se recibe peticion externa desde microservicio de transaccion para actualizar balance de la cuenta con numero: {}", accountNumber);
+        return this.accountService.updateBalanceAccount(accountNumber, newBalance)
                 .map(account -> ResponseEntity.status(HttpStatus.CREATED).contentType(MediaType.APPLICATION_JSON).body(account))
                 .orElse(ResponseEntity.badRequest().build());
     }

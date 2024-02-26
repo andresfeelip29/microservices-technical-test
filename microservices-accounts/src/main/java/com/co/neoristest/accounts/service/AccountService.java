@@ -24,5 +24,5 @@ public interface AccountService {
 
     Boolean deleteAccount(Long accountId);
 
-    Optional<AccountResponseDto> updateBalanceAccount(Long accountId, BigDecimal newBalance);
+    Optional<AccountResponseDto> updateBalanceAccount(String accountNumber, BigDecimal newBalance);
 }
