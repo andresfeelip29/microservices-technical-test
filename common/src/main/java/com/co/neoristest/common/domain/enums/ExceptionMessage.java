@@ -8,6 +8,8 @@ public enum ExceptionMessage {
     ACCOUNT_NUMBER_NOT_FOUND("No existe cuenta registrada con numero de cuenta: %s!"),
     ACCOUNT_ASSOCIATED_TO_CLIENT_NO_FOUND("No existe una cuenta con id: %d , asociado a algun usuario en microservicio de usuarios!"),
 
+    ACCOUNT_NUMBER_ASSOCIATED_TO_CLIENT_NO_FOUND("No existe una cuenta con numero: %s , asociado a algun usuario en microservicio de usuarios!"),
+
     INCORRECT_CREDENTIALS("Credenciales incororrestas!"),
 
     ACCOUNT_NOT_FOUND_IN_MICROSERVICES_ACCOUNTS("No se encontro cuenta en microservicios de cuentas asociado al numero de cuenta: %S!"),

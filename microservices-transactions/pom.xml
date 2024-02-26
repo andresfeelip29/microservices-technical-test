@@ -24,6 +24,16 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
 		</dependency>
 		<dependency>
@@ -56,6 +66,8 @@
 						<includes>
 							<include>application-dev.properties</include>
 							<include>application.yml</include>
+							<include>banner.txt</include>
+							<include>validation-messages.properties</include>
 						</includes>
 					</resource>
 				</resources>
@@ -81,6 +93,8 @@
 						<includes>
 							<include>application-prod.properties</include>
 							<include>application.yml</include>
+							<include>banner.txt</include>
+							<include>validation-messages.properties</include>
 						</includes>
 					</resource>
 				</resources>

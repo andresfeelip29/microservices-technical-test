@@ -90,9 +90,17 @@ public class AccountServiceImpl implements AccountService {
     @Transactional(readOnly = true)
     public Optional<AccountResponseDto> findAccountByAccountNumber(String accountNumber) {
         log.info("Se realiza consulta con numero de cuenta: {}", accountNumber);
-        return Optional.ofNullable(this.accountRepository.findAccountByAccountNumber(accountNumber)
-                .map(this.accountMapper::accountToAccountResponseDto)
-                .orElseThrow(() -> new AccountNotFoundException(String.format(ExceptionMessage.ACCOUNT_NUMBER_NOT_FOUND.getMessage(), accountNumber))));
+        Account account = this.accountRepository.findAccountByAccountNumber(accountNumber)
+                .orElseThrow(() -> new AccountNotFoundException(String.format(ExceptionMessage.ACCOUNT_NUMBER_NOT_FOUND.getMessage(), accountNumber)));
+        try {
+            log.info("Se realiza consulta a microservicio de usuarios, a usuario con id : {}", account.getAccountUser().getClientId());
+            User userFromMicroserviceClient = this.userFeignRequest.findUserFromMicroserviceUser(account.getAccountUser().getClientId());
+            account.setUser(userFromMicroserviceClient);
+            return Optional.ofNullable(this.accountMapper.accountToAccountResponseDto(account));
+        } catch (FeignException e) {
+            log.info("No se encontro cuenta con numero: {}, asociada algun usuario en consulta a microservicio clientes", accountNumber);
+            throw new ClientAccountNotFoundException(String.format(ExceptionMessage.ACCOUNT_NUMBER_ASSOCIATED_TO_CLIENT_NO_FOUND.getMessage(), accountNumber));
+        }
     }
 
     @Override
@@ -104,7 +112,7 @@ public class AccountServiceImpl implements AccountService {
         if (Objects.isNull(accountDTO)) return null;
         log.info("Se realiza consulta a microservicio de usuarios para asignacion de cuenta, a usuario con id : {}", accountDTO.userId());
 
-        if (CalculatedBalance.isLessThanZero(accountDTO.balance())) {
+        if (Boolean.TRUE.equals(CalculatedBalance.isLessThanZero(accountDTO.balance()))) {
             throw new BalanceNegativeException(ExceptionMessage.BALANCE_NEGATIVE.getMessage());
         }
 

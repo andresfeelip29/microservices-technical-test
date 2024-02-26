@@ -20,10 +20,10 @@ public class RouterFunctionConfig {
 
     @Bean
     public RouterFunction<ServerResponse> routes(TransactionHandler handler) {
-        return RouterFunctions.route(RequestPredicates.GET("/api/v1/transacciones"), handler::findAll)
+        return RouterFunctions.route(RequestPredicates.GET("/api/v1/transacciones/"), handler::findAll)
                 .andRoute(RequestPredicates.GET("/api/v1/transacciones/{id}"), handler::findById)
                 .andRoute(RequestPredicates.POST("/api/v1/transacciones/"), handler::saveTransaction)
                 .andRoute(RequestPredicates.DELETE("/api/v1/transacciones/{id}"), handler::deleteTransaction)
-                .andRoute(RequestPredicates.GET("/api/v1/transacciones/filtrado"), handler::filterTransactionForRageDateAndClientId);
+                .andRoute(RequestPredicates.GET("/api/v1/transacciones/filtrado/"), handler::filterTransactionForRageDateAndClientId);
     }
 }

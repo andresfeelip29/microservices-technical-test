@@ -69,6 +69,8 @@
                             <filtering>true</filtering>
                             <includes>
                                 <include>application-dev.properties</include>
+                                <include>banner.txt</include>
+                                <include>validation-messages.properties</include>
                             </includes>
                         </resource>
                     </resources>
@@ -93,6 +95,8 @@
                             <filtering>true</filtering>
                             <includes>
                                 <include>application-prod.properties</include>
+                                <include>banner.txt</include>
+                                <include>validation-messages.properties</include>
                             </includes>
                         </resource>
                     </resources>

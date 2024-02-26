@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
 import javax.security.auth.login.AccountNotFoundException;
@@ -40,6 +41,8 @@ public class ExternalRequestServiceImpl implements ExternalRequestService {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(Account.class)
+                .onErrorResume(WebClientResponseException.class, e -> e.getStatusCode().is4xxClientError() ? Mono.error(new AccountNotFoundException(
+                        String.format(ExceptionMessage.ACCOUNT_NOT_FOUND_IN_MICROSERVICES_ACCOUNTS.getMessage(), accountNumber))) : Mono.empty())
                 .switchIfEmpty(Mono.error(new AccountNotFoundException(
                         String.format(ExceptionMessage.ACCOUNT_NOT_FOUND_IN_MICROSERVICES_ACCOUNTS.getMessage(), accountNumber))));
     }
@@ -48,13 +51,15 @@ public class ExternalRequestServiceImpl implements ExternalRequestService {
     public Mono<Account> updateBalanceToAccountFromMicroserviciosAccount(String accountNumber, BigDecimal newBalance) {
         log.info("Se realiza solicitud de consulta a microservcios para actualizar balance de cuenta numero: {}", accountNumber);
         return this.webClient.build().put()
-                .uri(urlMicroserviceAccounts.concat("/external/"), uriBuilder -> uriBuilder
+                .uri(urlMicroserviceAccounts.concat("/cuentas/external/"), uriBuilder -> uriBuilder
                         .queryParam("accountNumber", accountNumber)
                         .queryParam("newBalance", newBalance)
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(Account.class)
+                .onErrorResume(WebClientResponseException.class, e -> e.getStatusCode().is4xxClientError() ? Mono.error(new BalanceUpdateException(
+                        String.format(ExceptionMessage.BALANCE_UPDATE_ERROR.getMessage(), accountNumber))) : Mono.empty())
                 .switchIfEmpty(Mono.error(new BalanceUpdateException(
                         String.format(ExceptionMessage.BALANCE_UPDATE_ERROR.getMessage(), accountNumber))));
     }

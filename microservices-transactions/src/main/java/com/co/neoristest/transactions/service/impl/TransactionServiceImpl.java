@@ -19,7 +19,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -76,13 +75,13 @@ public class TransactionServiceImpl implements TransactionService {
                 transactionDto.accountOriginNumber());
 
         Mono<Account> accountDestiny = this.externalRequestService
-                .findAccountByAccountNumberFromMicroserviceAccount(transactionDto.accountOriginNumber());
+                .findAccountByAccountNumberFromMicroserviceAccount(transactionDto.accountDestinyNumber());
 
 
         result = accountOrigin.zipWith(accountDestiny, (o, d) -> {
 
             if (CalculatedBalance.isLessThanZero(o.getBalance()) || CalculatedBalance.isZero(o.getBalance()) ||
-                    CalculatedBalance.hasBalanceForTransaction(o.getBalance(), transactionDto.transactionValue()))
+                    Boolean.TRUE.equals(CalculatedBalance.hasBalanceForTransaction(o.getBalance(), transactionDto.transactionValue())))
                 throw new AccountHasNoBalanceException(
                         ExceptionMessage.ACCOUNT_HAS_NOT_BALANCE_FOR_TRANSACTION.getMessage());
 

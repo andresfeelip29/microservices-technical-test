@@ -36,6 +36,10 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
 	</dependencies>
 
         <profiles>
@@ -57,6 +61,8 @@
                             <includes>
                                 <include>application-dev.properties</include>
 								<include>application.yml</include>
+								<include>banner.txt</include>
+								<include>validation-messages.properties</include>
                             </includes>
                         </resource>
                     </resources>
@@ -82,6 +88,8 @@
 						<includes>
 							<include>application-prod.properties</include>
 							<include>application.yml</include>
+							<include>banner.txt</include>
+							<include>validation-messages.properties</include>
 						</includes>
 					</resource>
 				</resources>
