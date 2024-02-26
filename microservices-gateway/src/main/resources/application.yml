@@ -3,16 +3,28 @@ spring:
     gateway:
       routes:
         - id: microservices-users
-          uri: http://127.0.0.1:8001
+          uri: lb://host.docker.internal:8001
           predicates:
             - Path=/api/v1/usuarios/**
           filters:
             - StripPrefix=3
+        - id: microservices-accounts
+          uri: lb://host.docker.internal:8002
+          predicates:
+            - Path=/api/v1/cuentas/**
+          filters:
+            - StripPrefix=3
+        - id: microservices-transactions
+          uri: lb://host.docker.internal:8003
+          predicates:
+            - Path=/api/v1/transacciones/**
+          filters:
+            - StripPrefix=3
         - id: microservices-auth
-          uri: http://127.0.0.1:9000
+          uri: http://host.docker.internal:9000
           predicates:
             - Path=/**
           filters:
-              - StripPrefix=0
+            - StripPrefix=0
 
 

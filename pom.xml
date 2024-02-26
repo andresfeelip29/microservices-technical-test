@@ -11,6 +11,7 @@
         <module>microservices-gateway</module>
         <module>microservices-accounts</module>
         <module>microservices-transactions</module>
+        <module>microservices-registry</module>
     </modules>
 
 
