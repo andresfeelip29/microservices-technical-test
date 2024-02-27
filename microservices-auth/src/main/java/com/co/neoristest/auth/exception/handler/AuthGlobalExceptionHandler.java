@@ -7,6 +7,7 @@ import com.co.neoristest.common.exception.handler.GlobalExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,6 +22,12 @@ public class AuthGlobalExceptionHandler extends GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleException(Throwable e) {
         log.error(e.getMessage(), e);
         return this.buildErrorResponse(e, e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = {BadCredentialsException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handleException(BadCredentialsException e) {
+        return this.buildErrorResponse(e, "Credenciales de acceso incorrectas!", HttpStatus.BAD_REQUEST);
     }
 
 }

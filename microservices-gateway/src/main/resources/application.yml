@@ -3,28 +3,33 @@ spring:
     gateway:
       routes:
         - id: microservices-users
-          uri: lb://host.docker.internal:8001
+          uri: ${USER_URL:http://host.docker.internal:8001}
           predicates:
             - Path=/api/v1/usuarios/**
           filters:
-            - StripPrefix=3
+            - AuthenticationFilter
+
+
         - id: microservices-accounts
-          uri: lb://host.docker.internal:8002
+          uri: ${ACCOUNT_URL:http://host.docker.internal:8002}
           predicates:
             - Path=/api/v1/cuentas/**
           filters:
-            - StripPrefix=3
+            - AuthenticationFilter
+
+
         - id: microservices-transactions
-          uri: lb://host.docker.internal:8003
+          uri: ${TRANSACTION_URL:http://host.docker.internal:8003}
           predicates:
             - Path=/api/v1/transacciones/**
           filters:
-            - StripPrefix=3
+            - AuthenticationFilter
+
+
         - id: microservices-auth
-          uri: http://host.docker.internal:9000
+          uri: ${AUTH_URL:http://host.docker.internal:9000}
           predicates:
-            - Path=/**
-          filters:
-            - StripPrefix=0
+            - Path=/api/v1/auth/**
+
 
 

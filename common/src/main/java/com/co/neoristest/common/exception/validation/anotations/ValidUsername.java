@@ -1,7 +1,7 @@
-package com.co.neoristest.users.exception.validation.anotations;
+package com.co.neoristest.common.exception.validation.anotations;
 
 
-import com.co.neoristest.users.exception.validation.validator.ValidUsernameValidator;
+import com.co.neoristest.common.exception.validation.validator.ValidUsernameValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

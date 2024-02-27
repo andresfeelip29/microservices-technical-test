@@ -1,6 +1,6 @@
-package com.co.neoristest.users.exception.validation.validator;
+package com.co.neoristest.common.exception.validation.validator;
 
-import com.co.neoristest.users.exception.validation.anotations.ValidUsername;
+import com.co.neoristest.common.exception.validation.anotations.ValidUsername;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -17,7 +17,7 @@ public class ValidUsernameValidator implements ConstraintValidator<ValidUsername
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
 
-        String ragex = "[a-zA-Z]+";
+        String ragex = "[a-zA-Z0-9]+";
 
         if(Objects.isNull(value)) return false;
 

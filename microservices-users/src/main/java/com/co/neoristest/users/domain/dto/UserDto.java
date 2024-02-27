@@ -1,6 +1,6 @@
 package com.co.neoristest.users.domain.dto;
 
-import com.co.neoristest.users.exception.validation.anotations.ValidUsername;
+import com.co.neoristest.common.exception.validation.anotations.ValidUsername;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

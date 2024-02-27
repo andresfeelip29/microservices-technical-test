@@ -21,7 +21,10 @@ public enum ExceptionMessage {
     INCORRECT_BANK_ACCOUNT("El tipo de cuenta suministrado debe ser Ahorro o Corriente, el valor ingresado fue: %s"),
     BALANCE_NEGATIVE("El monto de la cuenta no puede ser menor que cero!"),
 
-    BALANCE_UPDATE_ERROR("No se pudo actualizar balance de transacciones realizada en cuenta con id: %s")
+    BALANCE_UPDATE_ERROR("No se pudo actualizar balance de transacciones realizada en cuenta con id: %s"),
+
+    ERROR_SAVE_USER_IN_MICROSERVICES_USERS("No se pudo guardar usuario en microservicios de usuarios!")
+
 
     ;
 

@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/usuarios/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
     private final UserService userService;
@@ -31,13 +31,5 @@ public class AuthController {
                 .map(user -> ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(user))
                 .orElse(ResponseEntity.badRequest().build());
     }
-
-
-    @GetMapping("/authorized")
-    public Map<String, String> authorized(@RequestParam(name = "code") String code) {
-        log.info("Se recibe peticion de consulta de autorizacion");
-        return Collections.singletonMap("code", code);
-    }
-
 
 }
