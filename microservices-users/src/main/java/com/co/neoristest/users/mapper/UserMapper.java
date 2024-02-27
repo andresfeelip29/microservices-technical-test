@@ -7,7 +7,6 @@ import com.co.neoristest.users.domain.dto.UserLoginResponseDto;
 import com.co.neoristest.users.domain.dto.UserResponseDto;
 import com.co.neoristest.users.domain.models.User;
 import com.co.neoristest.users.domain.models.UserAccount;
-import com.co.neoristest.users.mapper.anotations.EncodedMapping;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 
@@ -17,11 +16,9 @@ import java.util.List;
 @Component
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-        uses = PasswordEncoderMapper.class)
+        injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface UserMapper {
 
-    @Mapping(source = "password", target = "password", qualifiedBy = EncodedMapping.class)
     User userDtoToUser(UserDto userDto);
 
     @Mapping(source = "userAccounts" , target = "accounts", qualifiedByName = "accountListToListIds")
@@ -31,7 +28,6 @@ public interface UserMapper {
     UserLoginResponseDto userToUserLoginResponseDto(User user);
     UserExternalDto userToUserExternalDto(User user);
 
-    @Mapping(source = "password", target = "password", qualifiedBy = EncodedMapping.class)
     User updateUserToUserDto(@MappingTarget User user, UserDto userDto);
 
     @Named("accountListToListIds")
