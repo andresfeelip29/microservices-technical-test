@@ -1,0 +1,640 @@
+{
+	"info": {
+		"_postman_id": "cdda7dd1-1bd1-42f4-b279-904d6e81e9ba",
+		"name": "Neoris-Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33096850"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Peticion registro usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"usuario1111\",\r\n    \"password\": \"12345\",\r\n    \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generacion de token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"usuario1111\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/auth/token",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Listar usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvMTExMSIsImlhdCI6MTcwOTA2NDg2OSwiZXhwIjoxNzA5MDY2NjY5fQ.JYqTv0Lb73SMfYPI71d7lmteK7iK2SLXxAm1LO_HLsY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/usuarios/",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuario por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvMTExMSIsImlhdCI6MTcwODk5ODQ1NCwiZXhwIjoxNzA5MDAwMjU0fQ.d2BKYNn3MBQaGNvud_cSZPLwEfAxlZQE5Z7srbqGhQk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/usuarios/2",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"miguel\",\r\n    \"password\":\"12345\",\r\n    \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/usuarios/",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuarios por id con detalle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvMTExMSIsImlhdCI6MTcwODk5ODQ1NCwiZXhwIjoxNzA5MDAwMjU0fQ.d2BKYNn3MBQaGNvud_cSZPLwEfAxlZQE5Z7srbqGhQk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/usuarios/detail/3",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"detail",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"felipe\",\r\n    \"password\":\"andkiller29\",\r\n    \"status\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/usuarios/3",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/usuarios/2",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cuentas",
+			"item": [
+				{
+					"name": "Listar cuentas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvMTExMSIsImlhdCI6MTcwODk5ODQ1NCwiZXhwIjoxNzA5MDAwMjU0fQ.d2BKYNn3MBQaGNvud_cSZPLwEfAxlZQE5Z7srbqGhQk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/cuentas/",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"cuentas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cuenta con detalle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/cuentas/detail/6",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"cuentas",
+								"detail",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cuenta por numero de cuenta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/cuentas/483185156057",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"cuentas",
+								"483185156057"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar cuenta y asignar a usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvMTExMSIsImlhdCI6MTcwOTA2NDg2OSwiZXhwIjoxNzA5MDY2NjY5fQ.JYqTv0Lb73SMfYPI71d7lmteK7iK2SLXxAm1LO_HLsY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountType\": \"Corriente\",\r\n    \"balance\": 14555,\r\n    \"status\":true,\r\n    \"userId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/cuentas/",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"cuentas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar cuenta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountType\": \"Corriente\",\r\n    \"balance\": 200,\r\n    \"status\":true,\r\n    \"userId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/cuentas/7",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"cuentas",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Elimianr cuenta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/cuentas/5",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"cuentas",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transacciones",
+			"item": [
+				{
+					"name": "Listar transacciones",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvMTExMSIsImlhdCI6MTcwOTA2NDg2OSwiZXhwIjoxNzA5MDY2NjY5fQ.JYqTv0Lb73SMfYPI71d7lmteK7iK2SLXxAm1LO_HLsY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/transacciones/",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"transacciones",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transaccion por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/transacciones/65dc1b6e516dd314754feb26",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"transacciones",
+								"65dc1b6e516dd314754feb26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar transaccion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvMTExMSIsImlhdCI6MTcwOTA2NDg2OSwiZXhwIjoxNzA5MDY2NjY5fQ.JYqTv0Lb73SMfYPI71d7lmteK7iK2SLXxAm1LO_HLsY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionValue\": 100,\r\n    \"accountOriginNumber\": \"40985777321\",\r\n    \"accountDestinyNumber\": \"82954998996\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/transacciones/",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"transacciones",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar transaccion",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/transacciones/65dc2e4b25eb9d0e43199a38",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"transacciones",
+								"65dc2e4b25eb9d0e43199a38"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtras reporte",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://host.docker.internal:8090/api/v1/transacciones/filtrado/?initDate=25/02/2024 12:00&endDate=26/02/2024 09:00&clientId=4",
+							"protocol": "http",
+							"host": [
+								"host",
+								"docker",
+								"internal"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"v1",
+								"transacciones",
+								"filtrado",
+								""
+							],
+							"query": [
+								{
+									"key": "initDate",
+									"value": "25/02/2024 12:00"
+								},
+								{
+									"key": "endDate",
+									"value": "26/02/2024 09:00"
+								},
+								{
+									"key": "clientId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gateway",
+			"item": []
+		}
+	]
+}
