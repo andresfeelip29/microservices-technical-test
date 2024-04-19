@@ -15,7 +15,7 @@ Example app microservices patter with Java 18 using:
 
 ### Hello!
 
-This repository is created for test in neoris
+This repository is created for technical test
 
 # Example microservice apps
 
