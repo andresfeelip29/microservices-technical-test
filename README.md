@@ -36,7 +36,7 @@ This repository is created for technical test
 ## Architecture Diagram
 
 Take a look at the components diagram that describes them and their interactions.
-![microservices-test-example](/test-neoris-diagram.jpg)
+![microservices-test-example](/test-diagram.jpg)
 
 ## How to start
 
